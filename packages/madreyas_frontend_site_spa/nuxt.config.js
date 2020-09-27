@@ -6,7 +6,13 @@ export default {
 
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-
+  // Storybook
+  storybook: {
+    stories: [
+      '~/stories/**/*.stories.js',
+      '~/custom/path/sample.stories.js'
+    ],
+  },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - madreyas_frontend_site_spa',

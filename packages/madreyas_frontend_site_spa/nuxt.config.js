@@ -8,10 +8,7 @@ export default {
   target: 'static',
   // Storybook
   storybook: {
-    stories: [
-      '~/stories/**/*.stories.js',
-      '~/custom/path/sample.stories.js'
-    ],
+    stories: ['~/stories/**/*.stories.js'],
   },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {

@@ -12,10 +12,11 @@
     "lint": "yarn lint:js && yarn lint:style",
     "prettify": "npx prettier --write \"**/*.{vue,js}\"",
     "test": "jest",
-    "commit": "cd ../../ & npx git-cz"
+    "commit": "npx git-cz"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "firebase": "^7.21.1",
     "nuxt": "^2.14.5"
   },
   "devDependencies": {

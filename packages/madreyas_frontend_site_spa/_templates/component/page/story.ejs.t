@@ -1,5 +1,5 @@
 ---
-to: "pages/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === 'base-' ? '_' : '' %><%= h.changeCase.kebab(name) %>.stories.js"
+to: "stories/<%= h.changeCase.kebab(name).toLowerCase().slice(0, 5) === 'base-' ? '_' : '' %><%= h.changeCase.kebab(name) %>.stories.js"
 ---
 <%
   let fileName = h.changeCase.kebab(name).toLowerCase()

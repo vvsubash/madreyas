@@ -1,5 +1,7 @@
 <template>
-  <div>Removed Unnecessary data</div>
+  <nuxt-link to="/addcow">
+    <button>add cow</button>
+  </nuxt-link>
 </template>
 
 <script>

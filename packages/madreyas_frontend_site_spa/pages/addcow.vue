@@ -64,17 +64,15 @@ export default {
     }
   },
   methods: {
-    addCow() {
+    async addCow() {
       class NewCow {
         constructor(
-          name,
           cowStateEntered,
           dateOfRecentCalving,
           inseminatedOn,
           semenId,
           driedOn,
         ) {
-          this.name = name
           if (cowStateEntered === 'Just Calved') {
             this.state = 'justCalved'
             this.dateOfRecentCalving = new Date(dateOfRecentCalving)
@@ -92,14 +90,23 @@ export default {
         }
       }
       const kow = new NewCow(
-        this.newCow,
         this.cowStateEntered,
         this.dateOfRecentCalving,
         this.inseminatedOn,
         this.semenId,
         this.driedOn,
       )
-      db.collection(`users/${this.$store.state.user.uid}/cows`)
+
+      await db
+        .collection(`users/${this.$store.state.user.uid}/animals/`)
+        .doc(this.newCow)
+        .set({
+          name: this.newCow,
+          species: 'cow',
+        })
+      db.collection(
+        `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
+      )
         .add(Object.assign({}, kow))
         .then(this.$router.push(`/`))
     },

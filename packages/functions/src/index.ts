@@ -24,7 +24,7 @@ export const useWildcard = functions.region('asia-south1')
     // context.params.userId == "marie"
     // ... and ...
     // change.after.data() == {name: "Marie"}
-    console.log(change.after.data())
+    console.log(change.after.data().state)
     console.log(context.params.userId)
   });
 export const addUserOnSignUp = functions
@@ -38,4 +38,30 @@ export const addUserOnSignUp = functions
       pic: user.photoURL,
     });
     console.log("completed");
+  });
+export const updateCowStateInDoc = functions.region('asia-south1')
+  .firestore
+  .document('users/{userId}/animals/{animal}/heatData/{newState}')
+  .onWrite((change, context) => {
+    const docRef = db.collection('users').doc(context.params.userId).collection('animals').doc(context.params.animal)
+
+    switch (change.after.data().state) {
+      case 'justCalved':
+        docRef.set({
+          state: 'justCalved'
+        }, { merge: true })
+        break;
+      case 'inseminated':
+        docRef.set({
+          state: 'inseminated'
+        }, { merge: true })
+        break;
+      case 'dried':
+        docRef.set({
+          state: 'dried'
+        }, { merge: true })
+        break;
+      default:
+        break;
+    }
   });

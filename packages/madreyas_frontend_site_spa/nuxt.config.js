@@ -6,7 +6,10 @@ export default {
 
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-
+  // Storybook
+  storybook: {
+    stories: ['~/stories/**/*.stories.js'],
+  },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - madreyas_frontend_site_spa',
@@ -20,10 +23,9 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
-
+  css: ['~/assets/main.css'],
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ['~/plugins/firebase', '~/plugins/authPersistense'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

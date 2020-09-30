@@ -5,5 +5,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  beforeMount() {
+    if (this.$store.state.user === null) {
+      this.$store.dispatch('signIn')
+    }
+  },
+}
 </script>

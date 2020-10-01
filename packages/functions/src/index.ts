@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from "firebase-admin";
+import { addDays } from 'date-fns'
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
@@ -7,26 +8,6 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-// Start writing Firebase Functions
-// https://firebase.google.com/docs/functions/typescript
-
-export const helloWorld = functions.https.onRequest((request, response) => {
-  functions.logger.info("Hello logs!", { structuredData: true });
-  response.send("Hello from Firebase!");
-});
-
-
-export const useWildcard = functions.region('asia-south1')
-  .firestore
-  .document('users/{userId}/cows/{cow}')
-  .onWrite((change, context) => {
-    // If we set `/users/marie` to {name: "Marie"} then
-    // context.params.userId == "marie"
-    // ... and ...
-    // change.after.data() == {name: "Marie"}
-    console.log(change.after.data().state)
-    console.log(context.params.userId)
-  });
 export const addUserOnSignUp = functions
   .region("asia-south1")
   .auth.user()
@@ -48,17 +29,22 @@ export const updateCowStateInDoc = functions.region('asia-south1')
     switch (change.after.data().state) {
       case 'justCalved':
         docRef.set({
-          state: 'justCalved'
+          whenCanSheBeInseminated: new Date(addDays(change.after.data().dateOfRecentCalving.toDate(), 77))
         }, { merge: true })
         break;
       case 'inseminated':
         docRef.set({
-          state: 'inseminated'
+          check1: {
+            date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 18)),
+            isCompleted: false,
+            isPassed: false
+          }
         }, { merge: true })
         break;
       case 'dried':
         docRef.set({
-          state: 'dried'
+          dateToCheckForEdema: new Date(addDays(change.after.data().inseminatedOn.toDate(), 272)),
+          expectedDateOfCalving: new Date(addDays(change.after.data().inseminatedOn.toDate(), 279)),
         }, { merge: true })
         break;
       default:

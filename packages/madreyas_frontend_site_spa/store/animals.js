@@ -18,7 +18,7 @@ export const mutations = {
 }
 
 export const actions = {
-  getCows: firestoreAction(({ rootState, bindFirestoreRef }) => {
+  getAnimals: firestoreAction(({ rootState, bindFirestoreRef }) => {
     bindFirestoreRef(
       'animalsList',
       db.collection(`users/${rootState.user.uid}/animals`),

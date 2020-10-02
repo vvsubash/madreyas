@@ -50,7 +50,7 @@
   </v-container>
 </template>
 <script>
-import db from '~/plugins/firestore'
+import { db } from '~/plugins/firebase'
 export default {
   data() {
     return {

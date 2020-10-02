@@ -1,4 +1,3 @@
-
 import { mount } from '@vue/test-utils'
 import User from '@/pages/user'
 

@@ -9,7 +9,15 @@
       v-for="animal in this.$store.state.animals.animalsList"
       :key="animal.name"
     >
-      <nuxt-link :to="`/${animal.name}`">{{ animal.name }}</nuxt-link>
+      <nuxt-link :to="`/${animal.name}`">
+        <v-card max-width="400" class="mx-auto">
+          <v-card-title>
+            {{ animal.name }}
+          </v-card-title>
+          <v-list-item-subtitle>{{ animal.state }}</v-list-item-subtitle>
+        </v-card>
+        <br />
+      </nuxt-link>
     </section>
 
     <v-btn @click="gc">getcows</v-btn>

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="this.$store.state.user === null">
+    <h1>Please Refresh to Login</h1>
+  </div>
+  <div v-else>
     <nuxt />
   </div>
 </template>

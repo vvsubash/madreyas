@@ -4,7 +4,7 @@
 import { vuexfireMutations, firestoreAction } from 'vuexfire'
 import { db } from '../plugins/firebase'
 export const state = () => ({
-  cowsList: [],
+  animalsList: [],
 })
 
 export const getters = {
@@ -20,7 +20,7 @@ export const mutations = {
 export const actions = {
   getCows: firestoreAction(({ rootState, bindFirestoreRef }) => {
     bindFirestoreRef(
-      'cowsList',
+      'animalsList',
       db.collection(`users/${rootState.user.uid}/animals`),
     )
   }),

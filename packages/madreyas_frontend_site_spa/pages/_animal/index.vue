@@ -13,9 +13,9 @@
 export default {
   computed: {
     animal() {
-      return this.$store.state.animals.animalsList.find((x) => {
-        return x.name === this.$route.params.animal
-      })
+      return this.$store.getters['animals/getTheAnimal'](
+        this.$route.params.animal,
+      )
     },
   },
 }

@@ -11,6 +11,11 @@ export const getters = {
   getterValue: (state) => {
     return state.value
   },
+  getTheAnimal: (state) => (route) => {
+    return state.animalsList.find((x) => {
+      return x.name === route
+    })
+  },
 }
 
 export const mutations = {

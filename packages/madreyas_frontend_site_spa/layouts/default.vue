@@ -7,7 +7,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary dense>
+    <v-navigation-drawer v-model="drawer" fixed bottom temporary dense>
       <v-list nav>
         <v-list-item-group
           v-model="group"

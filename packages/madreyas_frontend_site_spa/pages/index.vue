@@ -28,7 +28,7 @@
       color="orange accent-2"
       bottom
       right
-      absolute
+      fixed
       @click="$router.push('/addcow')"
     >
       <v-icon>mdi-plus</v-icon>

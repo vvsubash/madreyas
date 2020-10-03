@@ -23,6 +23,16 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-btn
+      fab
+      color="orange accent-2"
+      bottom
+      right
+      absolute
+      @click="$router.push('/addcow')"
+    >
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </v-container>
 </template>
 

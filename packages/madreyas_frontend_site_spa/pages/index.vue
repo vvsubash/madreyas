@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row dense>
+    <v-row>
       <v-col
         v-for="animal in this.$store.state.animals.animalsList"
         :key="animal.name"

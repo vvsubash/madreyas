@@ -53,8 +53,8 @@ export default {
     if (this.$store.state.user === null) {
       this.$store.dispatch('signIn')
     }
-    this.$store.dispatch('animals/getAnimals')
   },
+
   methods: {
     logOut() {
       this.$store.dispatch('signOut')

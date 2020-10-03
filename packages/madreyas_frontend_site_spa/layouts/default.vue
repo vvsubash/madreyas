@@ -2,12 +2,12 @@
   <div v-if="this.$store.state.user === null">
     <h1>Please Refresh to Login</h1>
   </div>
-  <v-app v-else>
+  <v-app v-else class="mx-auto overflow-hidden">
     <v-app-bar color="orange" max-height="100">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" bottom temporary dense>
+    <v-navigation-drawer v-model="drawer" absolute temporary dense>
       <v-list nav>
         <v-list-item-group
           v-model="group"

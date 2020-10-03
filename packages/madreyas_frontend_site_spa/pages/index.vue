@@ -14,7 +14,11 @@
             height="200px"
           >
           </v-img>
-          <v-card-title v-text="animal.name"> </v-card-title>
+          <v-card-title
+            @click="$router.push(`/${animal.name}`)"
+            v-text="animal.name"
+          >
+          </v-card-title>
           <v-card-subtitle>State: {{ animal.state }} </v-card-subtitle>
         </v-card>
       </v-col>

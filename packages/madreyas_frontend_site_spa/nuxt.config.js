@@ -44,7 +44,7 @@ export default {
   modules: ['@nuxtjs/pwa'],
   pwa: {
     manifest: {
-      name: 'Madreyas App'
+      name: 'Madreyas App',
     },
   },
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

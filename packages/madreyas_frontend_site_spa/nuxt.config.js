@@ -42,7 +42,11 @@ export default {
   // Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/pwa'],
-
+  pwa: {
+    manifest: {
+      name: 'Madreyas App'
+    },
+  },
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

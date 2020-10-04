@@ -1,4 +1,3 @@
-
 import { mount } from '@vue/test-utils'
 import ViewAnimalCardList from '@/components/view-animal-card-list'
 

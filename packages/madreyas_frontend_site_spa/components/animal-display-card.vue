@@ -1,7 +1,7 @@
 <template>
   <v-card outlined max-width="400" class="mx-auto">
     <v-img
-      src="https://picsum.photos/400/300"
+      src="https://picsum.photos/id/460/400/300"
       class="white--text align-end"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
       height="200px"

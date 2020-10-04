@@ -3,7 +3,7 @@
     <h1>Please Refresh to Login</h1>
   </div>
   <v-app v-else class="mx-auto overflow-hidden">
-    <v-app-bar color="orange" max-height="100">
+    <v-app-bar color="orange" max-height="70">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
 

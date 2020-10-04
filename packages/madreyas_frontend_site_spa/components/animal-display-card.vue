@@ -25,7 +25,7 @@
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-        <view-cow-card :animal="animal" />
+        <view-animal-card :animal="animal" />
       </div>
     </v-expand-transition>
   </v-card>

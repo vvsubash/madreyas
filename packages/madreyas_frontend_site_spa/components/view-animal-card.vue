@@ -40,12 +40,6 @@
         title="Should Be Dried On"
         :sub-title="animal.check3.date.toDate()"
       />
-
-      <v-divider></v-divider>
-
-      <v-card-actions>
-        <v-btn text> Full Report </v-btn>
-      </v-card-actions>
     </v-list>
   </div>
 </template>

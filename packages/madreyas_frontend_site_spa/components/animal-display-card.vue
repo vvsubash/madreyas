@@ -26,6 +26,11 @@
       <div v-show="show">
         <v-divider></v-divider>
         <view-animal-card :animal="animal" />
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-btn text> Full Report </v-btn>
+        </v-card-actions>
       </div>
     </v-expand-transition>
   </v-card>

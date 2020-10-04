@@ -1,0 +1,12 @@
+# The following redirect is intended for use with most SPAs that handle
+# routing internally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+redirects]]
+  from = "http://app.madreyas.com/*"
+  to = "http://app.madreyas.com/*"
+  status = 301
+  force = true

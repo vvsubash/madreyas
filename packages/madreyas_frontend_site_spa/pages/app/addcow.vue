@@ -52,6 +52,7 @@
 <script>
 import { db } from '~/plugins/firebase'
 export default {
+  layout: 'authenticated',
   data() {
     return {
       newCow: 'Name',

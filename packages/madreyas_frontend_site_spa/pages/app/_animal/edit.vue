@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  layout: 'authenticated',
   computed: {
     animal() {
       return this.$store.getters['animals/getTheAnimal'](

@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <h1>
-      <nuxt-link :to="`/${animal.name}/edit`">{{ animal.name }}</nuxt-link>
+      <nuxt-link :to="`app/${animal.name}/edit`">{{ animal.name }}</nuxt-link>
     </h1>
     <section>
       <h3>{{ animal.state }}</h3>
@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  layout: 'authenticated',
   computed: {
     animal() {
       return this.$store.getters['animals/getTheAnimal'](

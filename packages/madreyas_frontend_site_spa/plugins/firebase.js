@@ -11,6 +11,7 @@ export const firebaseApp = firebase.initializeApp({
   storageBucket: process.env.NUXT_ENV_STORAGEBUCKET,
   messagingSenderId: process.env.NUXT_ENV_MESSAGINGSENDERID,
   appId: process.env.NUXT_ENV_APPID,
+  measurementId: process.env.NUXT_ENV_MEASUREMENTID,
 })
 
 firebase

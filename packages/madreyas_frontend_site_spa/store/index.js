@@ -47,7 +47,7 @@ export const actions = {
     auth
       .signOut()
       .then(() => {
-        this.$router.push('/')
+        this.$router.push({ path: '/' })
         // eslint-disable-next-line
         console.log('signed out')
       })

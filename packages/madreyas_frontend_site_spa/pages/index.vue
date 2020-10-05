@@ -39,8 +39,10 @@ export default {
   methods: {
     logIn() {
       this.$store.state.user == null
-        ? this.$store.dispatch('signIn').then(this.$router.push('/app'))
-        : this.$router.push('/app')
+        ? this.$store
+            .dispatch('signIn')
+            .then(this.$router.push({ path: 'app' }))
+        : this.$router.push({ path: 'app' })
     },
   },
 }

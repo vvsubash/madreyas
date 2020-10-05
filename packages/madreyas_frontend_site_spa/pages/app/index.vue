@@ -15,7 +15,7 @@
       bottom
       right
       fixed
-      @click="$router.push('/app/addcow')"
+      @click="$router.push({ path: 'app/addanimal' })"
     >
       <v-icon>mdi-plus</v-icon>
     </v-btn>

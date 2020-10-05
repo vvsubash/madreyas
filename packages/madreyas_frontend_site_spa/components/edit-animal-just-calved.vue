@@ -32,7 +32,7 @@
               v-model="semenIdNumber"
               label="Semen Id Number"
             ></v-text-field>
-            <v-btn outlined large @click="updateanimal">Add animal</v-btn>
+            <v-btn outlined large @click="updateanimal">Update animal</v-btn>
           </v-col>
         </v-row>
       </v-container>

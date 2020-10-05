@@ -8,7 +8,7 @@
     >
     </v-img>
     <v-card-title
-      @click="$router.push(`app/${animal.name}`)"
+      @click="$router.push({ path: `app/${animal.name}` })"
       v-text="animal.name"
     >
     </v-card-title>

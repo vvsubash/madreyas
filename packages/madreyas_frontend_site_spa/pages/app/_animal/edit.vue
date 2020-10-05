@@ -1,6 +1,6 @@
 <template>
   <main v-if="animal.name != null">
-    <h1>{{ animal.name }}</h1>
+    <!-- <h1>{{ animal.name }}</h1> -->
     <section v-if="animal.state == 'justCalved'">
       <edit-animal-just-calved :animal="animal" />
     </section>
@@ -10,7 +10,7 @@
     </section>
 
     <section v-else-if="animal.state == 'dried'">
-      <edit-animal-dried />
+      <edit-animal-dried :animal="animal" />
     </section>
 
     <section v-else>

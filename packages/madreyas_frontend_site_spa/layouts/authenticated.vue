@@ -15,7 +15,7 @@
         >
           <v-list-item>
             <v-list-item-title>
-              <nuxt-link to="app/addcow">
+              <nuxt-link to="/app/addcow">
                 <v-btn block elevation="2">add cow</v-btn>
               </nuxt-link></v-list-item-title
             >

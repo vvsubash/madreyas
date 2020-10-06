@@ -9,6 +9,7 @@
               v-model="newCow"
               label="Name of the Animal"
               required
+              :rules="nameRules"
             ></v-text-field>
             <v-select
               v-model="cowStateEntered"
@@ -61,6 +62,16 @@ export default {
       inseminatedOn: null,
       semenId: null,
       driedOn: null,
+      nameRules: [
+        (v) =>
+          !this.$store.state.animals.animalsList
+            .map((x) => x.name)
+            .includes(v) ||
+          'Animal with this name already exists please change the name',
+        (v) =>
+          !['Name', 'Cow', 'cow', 'animal'].includes(v) ||
+          'Please give your animal a unique name',
+      ],
     }
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-form data-app class="">
+    <v-form ref="form" data-app class="">
       <v-container>
         <h2 class="grey--text text--darken-4 font-weight-bold">Add New Cow</h2>
         <v-row>
@@ -21,6 +21,7 @@
               v-if="cowStateEntered === 'Just Calved'"
               v-model="dateOfRecentCalving"
               type="date"
+              :rules="dateRules"
               label="Date of recent calving"
             ></v-text-field>
             <v-text-field
@@ -29,6 +30,7 @@
               "
               v-model="inseminatedOn"
               type="date"
+              :rules="dateRules"
               label="Date of insemination"
             ></v-text-field>
             <v-text-field
@@ -42,6 +44,7 @@
               v-model="driedOn"
               type="date"
               label="Dried on"
+              :rules="dateRules"
             ></v-text-field>
             <v-btn outlined large @click="addCow">Add Cow</v-btn>
           </v-col>
@@ -73,55 +76,61 @@ export default {
           !['Name', 'Cow', 'cow', 'animal'].includes(v) ||
           'Please give your animal a unique name',
       ],
+      dateRules: [
+        (v) => v <= new Date() || "You can't enter future date",
+        (v) => !!v || "Date can't be empty",
+      ],
     }
   },
   methods: {
     async addCow() {
-      class NewCow {
-        constructor(
-          name,
-          cowStateEntered,
-          dateOfRecentCalving,
-          inseminatedOn,
-          semenId,
-          driedOn,
-        ) {
-          this.name = name
-          this.species = 'cow'
-          if (cowStateEntered === 'Just Calved') {
-            this.state = 'justCalved'
-            this.dateOfRecentCalving = new Date(dateOfRecentCalving)
-          }
-          if (cowStateEntered === 'Inseminated') {
-            this.state = 'inseminated'
-            this.inseminatedOn = new Date(inseminatedOn)
-            this.semenId = semenId
-          }
-          if (cowStateEntered === 'Dry') {
-            this.state = 'dried'
-            this.inseminatedOn = new Date(inseminatedOn)
-            this.driedOn = new Date(driedOn)
+      if (this.$refs.form.validate()) {
+        class NewCow {
+          constructor(
+            name,
+            cowStateEntered,
+            dateOfRecentCalving,
+            inseminatedOn,
+            semenId,
+            driedOn,
+          ) {
+            this.name = name
+            this.species = 'cow'
+            if (cowStateEntered === 'Just Calved') {
+              this.state = 'justCalved'
+              this.dateOfRecentCalving = new Date(dateOfRecentCalving)
+            }
+            if (cowStateEntered === 'Inseminated') {
+              this.state = 'inseminated'
+              this.inseminatedOn = new Date(inseminatedOn)
+              this.semenId = semenId
+            }
+            if (cowStateEntered === 'Dry') {
+              this.state = 'dried'
+              this.inseminatedOn = new Date(inseminatedOn)
+              this.driedOn = new Date(driedOn)
+            }
           }
         }
-      }
-      const kow = new NewCow(
-        this.newCow,
-        this.cowStateEntered,
-        this.dateOfRecentCalving,
-        this.inseminatedOn,
-        this.semenId,
-        this.driedOn,
-      )
+        const kow = new NewCow(
+          this.newCow,
+          this.cowStateEntered,
+          this.dateOfRecentCalving,
+          this.inseminatedOn,
+          this.semenId,
+          this.driedOn,
+        )
 
-      await db
-        .collection(`users/${this.$store.state.user.uid}/animals/`)
-        .doc(this.newCow)
-        .set(Object.assign({}, kow))
-      db.collection(
-        `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
-      )
-        .add(Object.assign({}, kow))
-        .then(this.$router.push({ path: 'app' }))
+        await db
+          .collection(`users/${this.$store.state.user.uid}/animals/`)
+          .doc(this.newCow)
+          .set(Object.assign({}, kow))
+        db.collection(
+          `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
+        )
+          .add(Object.assign({}, kow))
+          .then(this.$router.push({ path: 'app' }))
+      }
     },
   },
 }

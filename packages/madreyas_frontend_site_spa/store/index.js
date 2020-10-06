@@ -1,5 +1,6 @@
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
+import { vuexfireMutations } from 'vuexfire'
+import { auth, authProvider } from '~/plugins/firebase'
+
 export const state = () => ({
   user: null,
 })
@@ -14,14 +15,13 @@ export const mutations = {
   setUser: (state, payload) => {
     state.user = payload
   },
+  ...vuexfireMutations,
 }
 
 export const actions = {
   signIn({ commit }) {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    firebase
-      .auth()
-      .signInWithPopup(provider)
+    auth
+      .signInWithRedirect(authProvider)
       .then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // The signed-in user info.
@@ -44,11 +44,10 @@ export const actions = {
       })
   },
   signOut({ commit }) {
-    firebase
-      .auth()
+    auth
       .signOut()
       .then(() => {
-        this.$router.push('/')
+        this.$router.push({ path: '/' })
         // eslint-disable-next-line
         console.log('signed out')
       })

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "commit": "npx git-cz",
-    "deploysite": "cd ./packages/madreyas_frontend_site_spa && yarn build -m && firebase deploy --only hosting"
+    "deploysite": "cd ./packages/madreyas_frontend_site_spa && yarn generate -m && firebase deploy --only hosting"
   },
   "devDependencies": {
     "lerna": "^3.22.1"

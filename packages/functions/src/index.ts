@@ -22,7 +22,7 @@ export const addUserOnSignUp = functions
   });
 export const updateCowStateInDoc = functions.region('asia-south1')
   .firestore
-  .document('users/{userId}/animals/{animal}/heatData/{newState}')
+  .document('users/{userId}/animals/{animal}')
   .onWrite((change, context) => {
     const docRef = db.collection('users').doc(context.params.userId).collection('animals').doc(context.params.animal)
 
@@ -36,6 +36,16 @@ export const updateCowStateInDoc = functions.region('asia-south1')
         docRef.set({
           check1: {
             date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 18)),
+            isCompleted: false,
+            isPassed: false
+          },
+          check2: {
+            date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 90)),
+            isCompleted: false,
+            isPassed: false
+          },
+          check3: {
+            date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 180)),
             isCompleted: false,
             isPassed: false
           }

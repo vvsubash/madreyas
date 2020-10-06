@@ -53,6 +53,7 @@
 <script>
 import { db } from '~/plugins/firebase'
 export default {
+  layout: 'authenticated',
   data() {
     return {
       newCow: 'Name',
@@ -120,7 +121,7 @@ export default {
         `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
       )
         .add(Object.assign({}, kow))
-        .then(this.$router.push(`/`))
+        .then(this.$router.push({ path: 'app' }))
     },
   },
 }

@@ -21,7 +21,7 @@ export const mutations = {
 export const actions = {
   signIn({ commit }) {
     auth
-      .signInWithPopup(authProvider)
+      .signInWithRedirect(authProvider)
       .then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // The signed-in user info.
@@ -47,7 +47,7 @@ export const actions = {
     auth
       .signOut()
       .then(() => {
-        this.$router.push('/')
+        this.$router.push({ path: '/' })
         // eslint-disable-next-line
         console.log('signed out')
       })

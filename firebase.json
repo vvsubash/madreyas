@@ -16,5 +16,19 @@
     "ui": {
       "enabled": true
     }
+  },
+  "hosting": {
+    "public": "./packages/madreyas_frontend_site_spa/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }

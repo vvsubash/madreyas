@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h4>
+    <!-- <h4>
       {{
         `She calved on ${animal.dateOfRecentCalving} and can be inseminated on need to fix on logic`
       }}
-    </h4>
+    </h4> -->
     <v-form data-app>
       <v-container>
         <v-row>

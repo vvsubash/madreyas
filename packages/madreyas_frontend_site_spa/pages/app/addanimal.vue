@@ -12,6 +12,12 @@
               :rules="nameRules"
             ></v-text-field>
             <v-select
+              v-model="species"
+              :items="['Cow', 'Buffalo']"
+              label="Species"
+              required
+            ></v-select>
+            <v-select
               v-model="cowStateEntered"
               :items="possibleCowStates"
               label="State Of Cow"
@@ -60,6 +66,7 @@ export default {
   data() {
     return {
       newCow: 'Name',
+      species: null,
       possibleCowStates: ['Just Calved', 'Inseminated', 'Dry'],
       cowStateEntered: null,
       dateOfRecentCalving: null,
@@ -77,7 +84,7 @@ export default {
           'Please give your animal a unique name',
       ],
       dateRules: [
-        (v) => v <= new Date() || "You can't enter future date",
+        (v) => new Date(v) <= new Date() || "You can't enter future date",
         (v) => !!v || "Date can't be empty",
       ],
     }
@@ -88,6 +95,7 @@ export default {
         class NewAnimal {
           constructor(
             name,
+            species,
             cowStateEntered,
             dateOfRecentCalving,
             inseminatedOn,
@@ -95,7 +103,7 @@ export default {
             driedOn,
           ) {
             this.name = name
-            this.species = 'cow'
+            this.species = species
             if (cowStateEntered === 'Just Calved') {
               this.state = 'justCalved'
               this.dateOfRecentCalving = new Date(dateOfRecentCalving)
@@ -114,6 +122,7 @@ export default {
         }
         const kow = new NewAnimal(
           this.newCow,
+          this.species,
           this.cowStateEntered,
           this.dateOfRecentCalving,
           this.inseminatedOn,

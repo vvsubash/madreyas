@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     updateAnimal() {
-      console.log(this.checkOnePassed)
+      alert(this.checkOnePassed)
     },
     //   const uid = this.$store.state.user.uid
     //   const name = this.$route.params.animal

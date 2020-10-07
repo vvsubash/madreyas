@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <h1>
-      <nuxt-link :to="`${animal.name}/edit`">{{ animal.name }}</nuxt-link>
+      <nuxt-link :to="`/app/${animal.name}/edit`">{{ animal.name }}</nuxt-link>
     </h1>
     <section>
       <section v-if="animal.state == 'justCalved'">

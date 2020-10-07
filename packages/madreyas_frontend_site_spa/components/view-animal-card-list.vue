@@ -17,7 +17,7 @@ export default {
       default: 'Name',
     },
     subTitle: {
-      type: Date || String,
+      type: [Date, String],
       default: null,
     },
   },

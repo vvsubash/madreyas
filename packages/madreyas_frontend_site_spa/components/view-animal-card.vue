@@ -53,9 +53,7 @@ export default {
   },
   methods: {
     undef(x) {
-      console.log('x: ' + x)
-      // eslint-disable-next-line eqeqeq
-      return x == undefined
+      return x === undefined
         ? 'something went wrong please contact Admin'
         : x.toDate()
     },

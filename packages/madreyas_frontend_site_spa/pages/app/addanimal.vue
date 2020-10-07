@@ -46,7 +46,7 @@
               label="Dried on"
               :rules="dateRules"
             ></v-text-field>
-            <v-btn outlined large @click="addCow">Add Cow</v-btn>
+            <v-btn outlined large @click="addAnimal">Add Animal</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -83,9 +83,9 @@ export default {
     }
   },
   methods: {
-    async addCow() {
+    async addAnimal() {
       if (this.$refs.form.validate()) {
-        class NewCow {
+        class NewAnimal {
           constructor(
             name,
             cowStateEntered,
@@ -112,7 +112,7 @@ export default {
             }
           }
         }
-        const kow = new NewCow(
+        const kow = new NewAnimal(
           this.newCow,
           this.cowStateEntered,
           this.dateOfRecentCalving,

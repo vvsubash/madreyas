@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import Addcow from '@/pages/addcow'
+import AddAnimal from '@/pages/addanimal'
 
-describe('Addcow', () => {
+describe('AddAnimal', () => {
   test('is a Vue instance', () => {
-    const wrapper = mount(Addcow)
+    const wrapper = mount(AddAnimal)
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })

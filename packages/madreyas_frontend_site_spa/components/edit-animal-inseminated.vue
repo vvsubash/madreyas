@@ -53,17 +53,6 @@ export default {
     updateAnimal() {
       alert(this.checkOnePassed)
     },
-    //   const uid = this.$store.state.user.uid
-    //   const name = this.$route.params.animal
-    //   db.collection(`users/${uid}/animals`).doc(name).set(
-    //     {
-    //       // dateOfObservedHeat: firebase.firestore.FieldValue.arrayUnion(
-    //       //   new Date(this.dateOfObservedHeat),
-    //       // dorh: new Date(this.dateOfObservedHeat),
-    //     },
-    //     // { merge: true },
-    //   )
-    // },
   },
 }
 </script>

@@ -2,7 +2,7 @@
 // import * as firebase from 'firebase/app'
 // import 'firebase/firestore'
 import { vuexfireMutations, firestoreAction } from 'vuexfire'
-import { db } from '../plugins/firebase'
+import { db, auth } from '../plugins/firebase'
 export const state = () => ({
   animalsList: [],
 })
@@ -26,7 +26,7 @@ export const actions = {
   getAnimals: firestoreAction(({ rootState, bindFirestoreRef }) => {
     bindFirestoreRef(
       'animalsList',
-      db.collection(`users/${rootState.user.uid}/animals`),
+      db.collection(`users/${auth.currentUser.uid}/animals`),
     )
   }),
 }

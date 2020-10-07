@@ -1,5 +1,6 @@
 <template>
   <v-container bg fill-height grid-list-md text-xs-center>
+    <h3>we are still building this features.</h3>
     <v-layout row wrap align-center>
       <v-flex>
         <v-card outlined max-width="400" class="mx-auto">
@@ -17,6 +18,52 @@
                   class="mx-4"
                   :items="p"
                   label="Did She Pass Check One"
+                  required
+                ></v-select>
+              </v-row>
+              <v-divider />
+
+              <v-btn class="my-4 mx-4" outlined large @click="updateAnimal"
+                >Update Cow</v-btn
+              >
+            </v-container>
+          </v-form>
+          <v-form
+            v-else-if="animal.check2.isPassed == false"
+            ref="form"
+            data-app
+            class=""
+          >
+            <v-container grid-list-xs>
+              <v-row align="center" class="mx-auto">
+                <v-select
+                  v-model="checkTwoPassed"
+                  class="mx-4"
+                  :items="p"
+                  label="Did She Pass Check Two"
+                  required
+                ></v-select>
+              </v-row>
+              <v-divider />
+
+              <v-btn class="my-4 mx-4" outlined large @click="updateAnimal"
+                >Update Cow</v-btn
+              >
+            </v-container>
+          </v-form>
+          <v-form
+            v-else-if="animal.check3.isPassed == false"
+            ref="form"
+            data-app
+            class=""
+          >
+            <v-container grid-list-xs>
+              <v-row align="center" class="mx-auto">
+                <v-select
+                  v-model="checkThreePassed"
+                  class="mx-4"
+                  :items="p"
+                  label="Did She Pass Check Three"
                   required
                 ></v-select>
               </v-row>

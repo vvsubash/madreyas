@@ -15,6 +15,7 @@
               v-model="species"
               :items="['Cow', 'Buffalo']"
               label="Species"
+              :rules="selectRules"
               required
             ></v-select>
             <v-select
@@ -22,6 +23,7 @@
               :items="possibleCowStates"
               label="State Of Cow"
               required
+              :rules="selectRules"
             ></v-select>
             <v-text-field
               v-if="cowStateEntered === 'Just Calved'"
@@ -83,6 +85,7 @@ export default {
           !['Name', 'Cow', 'cow', 'animal'].includes(v) ||
           'Please give your animal a unique name',
       ],
+      selectRules: [(v) => v !== null],
       dateRules: [
         (v) => new Date(v) <= new Date() || "You can't enter future date",
         (v) => !!v || "Date can't be empty",

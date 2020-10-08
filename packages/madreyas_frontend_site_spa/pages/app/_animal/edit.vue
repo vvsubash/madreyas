@@ -20,14 +20,19 @@
 </template>
 
 <script>
+import { db, auth } from '~/plugins/firebase'
 export default {
   layout: 'authenticated',
-  computed: {
-    animal() {
-      return this.$store.getters['animals/getTheAnimal'](
-        this.$route.params.animal,
-      )
-    },
+  data() {
+    return {
+      animal: {},
+    }
+  },
+  firestore() {
+    const name = this.$route.params.animal
+    return {
+      animal: db.collection(`users/${auth.currentUser.uid}/animals`).doc(name),
+    }
   },
 }
 </script>

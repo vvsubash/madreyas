@@ -2,6 +2,10 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/performance'
+import Vue from 'vue'
+import { firestorePlugin } from 'vuefire'
+
+Vue.use(firestorePlugin)
 
 export const firebaseApp = firebase.initializeApp({
   apiKey: process.env.NUXT_ENV_APIKEY,

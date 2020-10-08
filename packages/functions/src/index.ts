@@ -40,18 +40,15 @@ export const updateCowStateInDoc = functions.region('asia-south1')
           docRef.set({
             check1: {
               date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 18)),
-              isCompleted: false,
-              isPassed: false
+              isPassed: null
             },
             check2: {
               date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 90)),
-              isCompleted: false,
-              isPassed: false
+              isPassed: null
             },
             check3: {
               date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 180)),
-              isCompleted: false,
-              isPassed: false
+              isPassed: null
             }
           }, { merge: true })
           break;

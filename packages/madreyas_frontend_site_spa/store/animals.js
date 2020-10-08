@@ -1,6 +1,3 @@
-// // eslint-disable-next-line no-unused-vars
-// import * as firebase from 'firebase/app'
-// import 'firebase/firestore'
 import { vuexfireMutations, firestoreAction } from 'vuexfire'
 import { db, auth } from '../plugins/firebase'
 export const state = () => ({

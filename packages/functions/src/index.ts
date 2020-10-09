@@ -25,7 +25,7 @@ export const updateCowStateInDoc = functions.region('asia-south1')
   .document('users/{userId}/animals/{animal}')
   .onWrite((change, context) => {
 
-    if (change.after.data().state !== change.before.data().state) {
+    if (change.before.data().state !== change.after.data().state) {
 
       const docRef = db.collection('users').doc(context.params.userId).collection('animals').doc(context.params.animal)
 

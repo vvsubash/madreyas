@@ -2,11 +2,13 @@
   <v-container>
     <v-form ref="form" data-app class="">
       <v-container>
-        <h2 class="grey--text text--darken-4 font-weight-bold">Add New Cow</h2>
+        <h2 class="grey--text text--darken-4 font-weight-bold">
+          Add New Animal
+        </h2>
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="newCow"
+              v-model="newAnimal"
               label="Name of the Animal"
               required
               :rules="nameRules"
@@ -19,14 +21,14 @@
               required
             ></v-select>
             <v-select
-              v-model="cowStateEntered"
-              :items="possibleCowStates"
-              label="State Of Cow"
+              v-model="animalStateEntered"
+              :items="possibleAnimalStates"
+              label="State Of Animal"
               required
               :rules="selectRules"
             ></v-select>
             <v-text-field
-              v-if="cowStateEntered === 'Just Calved'"
+              v-if="animalStateEntered === 'Just Calved'"
               v-model="dateOfRecentCalving"
               type="date"
               :rules="dateRules"
@@ -34,7 +36,8 @@
             ></v-text-field>
             <v-text-field
               v-if="
-                cowStateEntered === 'Inseminated' || cowStateEntered === 'Dry'
+                animalStateEntered === 'Inseminated' ||
+                animalStateEntered === 'Dry'
               "
               v-model="inseminatedOn"
               type="date"
@@ -42,13 +45,13 @@
               label="Date of insemination"
             ></v-text-field>
             <v-text-field
-              v-if="cowStateEntered === 'Inseminated'"
+              v-if="animalStateEntered === 'Inseminated'"
               v-model="semenId"
               type="text"
               label="Semen Id"
             ></v-text-field>
             <v-text-field
-              v-if="cowStateEntered === 'Dry'"
+              v-if="animalStateEntered === 'Dry'"
               v-model="driedOn"
               type="date"
               label="Dried on"
@@ -62,15 +65,17 @@
   </v-container>
 </template>
 <script>
+import { addDays } from 'date-fns'
 import { db } from '~/plugins/firebase'
+
 export default {
   layout: 'authenticated',
   data() {
     return {
-      newCow: 'Name',
+      newAnimal: 'Name',
       species: null,
-      possibleCowStates: ['Just Calved', 'Inseminated', 'Dry'],
-      cowStateEntered: null,
+      possibleAnimalStates: ['Just Calved', 'Inseminated', 'Dry'],
+      animalStateEntered: null,
       dateOfRecentCalving: null,
       inseminatedOn: null,
       semenId: null,
@@ -99,7 +104,7 @@ export default {
           constructor(
             name,
             species,
-            cowStateEntered,
+            animalStateEntered,
             dateOfRecentCalving,
             inseminatedOn,
             semenId,
@@ -107,16 +112,31 @@ export default {
           ) {
             this.name = name
             this.species = species
-            if (cowStateEntered === 'Just Calved') {
+            if (animalStateEntered === 'Just Calved') {
               this.state = 'justCalved'
               this.dateOfRecentCalving = new Date(dateOfRecentCalving)
+              this.whenCanSheBeInseminated = new Date(
+                addDays(new Date(dateOfRecentCalving), 77),
+              )
             }
-            if (cowStateEntered === 'Inseminated') {
+            if (animalStateEntered === 'Inseminated') {
               this.state = 'inseminated'
               this.inseminatedOn = new Date(inseminatedOn)
               this.semenId = semenId
+              this.check1 = {
+                date: new Date(addDays(new Date(inseminatedOn), 18)),
+                isPassed: null,
+              }
+              this.check2 = {
+                date: new Date(addDays(new Date(inseminatedOn), 90)),
+                isPassed: null,
+              }
+              this.check3 = {
+                date: new Date(addDays(new Date(inseminatedOn), 180)),
+                isPassed: null,
+              }
             }
-            if (cowStateEntered === 'Dry') {
+            if (animalStateEntered === 'Dry') {
               this.state = 'dried'
               this.inseminatedOn = new Date(inseminatedOn)
               this.driedOn = new Date(driedOn)
@@ -124,9 +144,9 @@ export default {
           }
         }
         const kow = new NewAnimal(
-          this.newCow,
+          this.newAnimal,
           this.species,
-          this.cowStateEntered,
+          this.animalStateEntered,
           this.dateOfRecentCalving,
           this.inseminatedOn,
           this.semenId,
@@ -135,12 +155,8 @@ export default {
 
         await db
           .collection(`users/${this.$store.state.user.uid}/animals/`)
-          .doc(this.newCow)
+          .doc(this.newAnimal)
           .set(Object.assign({}, kow))
-        db.collection(
-          `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
-        )
-          .add(Object.assign({}, kow))
           .then(this.$router.push({ path: '/app' }))
       }
     },

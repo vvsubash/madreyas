@@ -141,7 +141,7 @@ export default {
           `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
         )
           .add(Object.assign({}, kow))
-          .then(this.$router.push({ path: 'app' }))
+          .then(this.$router.push({ path: '/app' }))
       }
     },
   },

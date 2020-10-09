@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+import format from 'date-fns/format'
 export default {
   props: {
     animal: {
@@ -55,7 +56,7 @@ export default {
     undef(x) {
       return x === undefined
         ? 'something went wrong please contact Admin'
-        : x.toDate()
+        : format(x.toDate(), 'do-MMM-yyy')
     },
   },
 }

@@ -17,7 +17,7 @@
                   v-model="checkOnePassed"
                   class="mx-4"
                   :rules="selectRules"
-                  :items="['passed', 'failed']"
+                  :items="checkOptions"
                   label="Did She Pass Check One"
                   required
                 ></v-select>
@@ -41,7 +41,7 @@
                   v-model="checkTwoPassed"
                   class="mx-4"
                   :rules="selectRules"
-                  :items="['passed', 'failed']"
+                  :items="checkOptions"
                   label="Did She Pass Check Two"
                   required
                 ></v-select>
@@ -65,7 +65,7 @@
                   v-model="checkThreePassed"
                   class="mx-4"
                   :rules="selectRules"
-                  :items="['passed', 'failed']"
+                  :items="checkOptions"
                   label="Did She Pass Check Three"
                   required
                 ></v-select>
@@ -99,6 +99,7 @@ export default {
       checkOnePassed: null,
       checkTwoPassed: null,
       checkThreePassed: null,
+      checkOptions: ['Passed', 'Failed'],
       selectRules: [(v) => v != null || "This can't be empty"],
     }
   },
@@ -113,7 +114,7 @@ export default {
             .set(
               {
                 check1: {
-                  isPassed: this.checkOnePassed === 'passed',
+                  isPassed: this.checkOnePassed === 'Passed',
                 },
               },
               { merge: true },
@@ -123,7 +124,7 @@ export default {
             .doc(name)
             .set(
               {
-                check2: { isPassed: this.checkTwoPassed === 'passed' },
+                check2: { isPassed: this.checkTwoPassed === 'Passed' },
               },
               { merge: true },
             )
@@ -132,7 +133,7 @@ export default {
             .doc(name)
             .set(
               {
-                check3: { isPassed: this.checkThreePassed === 'passed' },
+                check3: { isPassed: this.checkThreePassed === 'Passed' },
               },
               { merge: true },
             )

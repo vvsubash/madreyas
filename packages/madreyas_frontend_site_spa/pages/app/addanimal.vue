@@ -140,6 +140,12 @@ export default {
               this.state = 'dried'
               this.inseminatedOn = new Date(inseminatedOn)
               this.driedOn = new Date(driedOn)
+              this.dateToCheckForEdema = new Date(
+                addDays(new Date(inseminatedOn), 272),
+              )
+              this.expectedDateOfCalving = new Date(
+                addDays(new Date(inseminatedOn), 279),
+              )
             }
           }
         }

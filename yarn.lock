@@ -2794,6 +2794,13 @@
     webpack-node-externals "^2.5.2"
     webpackbar "^4.0.0"
 
+"@nuxtjs/date-fns@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/date-fns/-/date-fns-1.4.0.tgz#7cb0a03938e95bced9b089820c32982a9e0638c7"
+  integrity sha512-YuAKM9Y1Ig3u5ZPlW466taL4S7llE5oxgM4Vnth3pEqpRtnAF3jlxlQ3MYv5HcdOnhWBx2pgrbRTSQmCqKF/4w==
+  dependencies:
+    date-fns "^2.16.1"
+
 "@nuxtjs/eslint-config@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/eslint-config/-/eslint-config-3.1.0.tgz#7e73aa08035a743b99e64ee4337cf526a09c9973"

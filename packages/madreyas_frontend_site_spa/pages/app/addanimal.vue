@@ -65,7 +65,6 @@
   </v-container>
 </template>
 <script>
-import { addDays } from 'date-fns'
 import { db } from '~/plugins/firebase'
 
 export default {
@@ -92,7 +91,7 @@ export default {
       ],
       selectRules: [(v) => v !== null],
       dateRules: [
-        (v) => new Date(v) <= new Date() || "You can't enter future date",
+        (v) => new Date() > new Date(v) || "You can't enter future date",
         (v) => !!v || "Date can't be empty",
       ],
     }
@@ -115,37 +114,16 @@ export default {
             if (animalStateEntered === 'Just Calved') {
               this.state = 'justCalved'
               this.dateOfRecentCalving = new Date(dateOfRecentCalving)
-              this.whenCanSheBeInseminated = new Date(
-                addDays(new Date(dateOfRecentCalving), 77),
-              )
             }
             if (animalStateEntered === 'Inseminated') {
               this.state = 'inseminated'
               this.inseminatedOn = new Date(inseminatedOn)
               this.semenId = semenId
-              this.check1 = {
-                date: new Date(addDays(new Date(inseminatedOn), 18)),
-                isPassed: null,
-              }
-              this.check2 = {
-                date: new Date(addDays(new Date(inseminatedOn), 90)),
-                isPassed: null,
-              }
-              this.check3 = {
-                date: new Date(addDays(new Date(inseminatedOn), 180)),
-                isPassed: null,
-              }
             }
             if (animalStateEntered === 'Dry') {
               this.state = 'dried'
               this.inseminatedOn = new Date(inseminatedOn)
               this.driedOn = new Date(driedOn)
-              this.dateToCheckForEdema = new Date(
-                addDays(new Date(inseminatedOn), 272),
-              )
-              this.expectedDateOfCalving = new Date(
-                addDays(new Date(inseminatedOn), 279),
-              )
             }
           }
         }

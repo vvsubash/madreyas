@@ -55,9 +55,9 @@ export default {
   data() {
     return {
       sheCalved: false,
-      dateOfRecentCalving: new Date(),
+      dateOfRecentCalving: null,
       dateRules: [
-        (v) => v <= new Date() || "You can't enter future date",
+        (v) => new Date(v) <= new Date() || "You can't enter future date",
         (v) => !!v || "Date can't be empty",
       ],
     }

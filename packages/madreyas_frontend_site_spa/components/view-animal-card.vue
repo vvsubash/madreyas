@@ -27,12 +27,12 @@
       />
       <view-animal-card-list
         v-if="animal.check1.isPassed == false"
-        title="Date Of Next Checking"
+        title="Date Of 1st Checking"
         :sub-title="undef(animal.check1.date)"
       />
       <view-animal-card-list
         v-else-if="animal.check2.isPassed == false"
-        title="Date Of Next Checking"
+        title="Date Of 2nd Checking"
         :sub-title="undef(animal.check2.date)"
       />
       <view-animal-card-list

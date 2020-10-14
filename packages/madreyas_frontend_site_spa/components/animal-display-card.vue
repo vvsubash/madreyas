@@ -7,7 +7,7 @@
       height="200px"
     >
     </v-img>
-    <v-card-title @click="$router.push({ path: `/app/${animal.name}` })">
+    <v-card-title @click="$router.push({ path: `/app/${animal.name}/edit` })">
       {{ `${animal.species === 'Cow' ? '🐄 ' : '🐃 '} ${animal.name}` }}
     </v-card-title>
     <v-card-subtitle>State: {{ animal.state }} </v-card-subtitle>

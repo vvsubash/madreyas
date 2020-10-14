@@ -1,8 +1,8 @@
-import Addcow from '../pages/addcow'
+import addAnimal from '../pages/addanimal'
 
-export default { title: 'Addcow' }
+export default { title: 'addAnimal' }
 
 export const asAComponent = () => ({
-  components: { Addcow },
-  template: '<Addcow></Addcow>',
+  components: { addAnimal },
+  template: '<AddAnimal></AddAnimal>',
 })

@@ -1,10 +1,82 @@
 <template>
   <v-container bg fill-height grid-list-md text-xs-center>
+    <h3>we are still building this features.</h3>
     <v-layout row wrap align-center>
       <v-flex>
         <v-card outlined max-width="400" class="mx-auto">
           <v-card-title nuxt v-text="animal.name"> </v-card-title>
-          <v-card-subtitle> 1. </v-card-subtitle>
+          <v-form
+            v-if="animal.check1.isPassed === null"
+            ref="form"
+            data-app
+            class=""
+          >
+            <v-container grid-list-xs>
+              <v-row align="center" class="mx-auto">
+                <v-select
+                  v-model="checkOnePassed"
+                  class="mx-4"
+                  :rules="selectRules"
+                  :items="checkOptions"
+                  label="Did She Pass Check One"
+                  required
+                ></v-select>
+              </v-row>
+              <v-divider />
+
+              <v-btn class="my-4 mx-4" outlined large @click="updateAnimal"
+                >Update Cow</v-btn
+              >
+            </v-container>
+          </v-form>
+          <v-form
+            v-else-if="animal.check2.isPassed === null"
+            ref="form"
+            data-app
+            class=""
+          >
+            <v-container grid-list-xs>
+              <v-row align="center" class="mx-auto">
+                <v-select
+                  v-model="checkTwoPassed"
+                  class="mx-4"
+                  :rules="selectRules"
+                  :items="checkOptions"
+                  label="Did She Pass Check Two"
+                  required
+                ></v-select>
+              </v-row>
+              <v-divider />
+
+              <v-btn class="my-4 mx-4" outlined large @click="updateAnimal"
+                >Update Cow</v-btn
+              >
+            </v-container>
+          </v-form>
+          <v-form
+            v-else-if="animal.check3.isPassed === null"
+            ref="form"
+            data-app
+            class=""
+          >
+            <v-container grid-list-xs>
+              <v-row align="center" class="mx-auto">
+                <v-select
+                  v-model="checkThreePassed"
+                  class="mx-4"
+                  :rules="selectRules"
+                  :items="checkOptions"
+                  label="Did She Pass Check Three"
+                  required
+                ></v-select>
+              </v-row>
+              <v-divider />
+
+              <v-btn class="my-4 mx-4" outlined large @click="updateAnimal"
+                >Update Cow</v-btn
+              >
+            </v-container>
+          </v-form>
         </v-card>
       </v-flex>
     </v-layout>
@@ -23,22 +95,50 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      checkOnePassed: null,
+      checkTwoPassed: null,
+      checkThreePassed: null,
+      checkOptions: ['Passed', 'Failed'],
+      selectRules: [(v) => v != null || "This can't be empty"],
+    }
   },
   methods: {
-    updateanimal() {
+    updateAnimal() {
       const uid = this.$store.state.user.uid
       const name = this.$route.params.animal
-      db.collection(`users/${uid}/animals`)
-        .doc(name)
-        .set(
-          {
-            // dateOfObservedHeat: firebase.firestore.FieldValue.arrayUnion(
-            //   new Date(this.dateOfObservedHeat),
-            dorh: new Date(this.dateOfObservedHeat),
-          },
-          { merge: true },
-        )
+      if (this.$refs.form.validate()) {
+        if (this.animal.check1.isPassed === null) {
+          db.collection(`users/${uid}/animals`)
+            .doc(name)
+            .set(
+              {
+                check1: {
+                  isPassed: this.checkOnePassed === 'Passed',
+                },
+              },
+              { merge: true },
+            )
+        } else if (this.animal.check2.isPassed === null) {
+          db.collection(`users/${uid}/animals`)
+            .doc(name)
+            .set(
+              {
+                check2: { isPassed: this.checkTwoPassed === 'Passed' },
+              },
+              { merge: true },
+            )
+        } else {
+          db.collection(`users/${uid}/animals`)
+            .doc(name)
+            .set(
+              {
+                check3: { isPassed: this.checkThreePassed === 'Passed' },
+              },
+              { merge: true },
+            )
+        }
+      }
     },
   },
 }

@@ -1,48 +1,63 @@
 <template>
   <v-container>
-    <v-form data-app class="">
+    <v-form ref="form" data-app class="">
       <v-container>
-        <h2 class="grey--text text--darken-4 font-weight-bold">Add New Cow</h2>
+        <h2 class="grey--text text--darken-4 font-weight-bold">
+          Add New Animal
+        </h2>
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="newCow"
+              v-model="newAnimal"
               label="Name of the Animal"
               required
+              :rules="nameRules"
             ></v-text-field>
             <v-select
-              v-model="cowStateEntered"
-              :items="possibleCowStates"
-              label="State Of Cow"
+              v-model="species"
+              :items="['Cow', 'Buffalo']"
+              label="Species"
+              :rules="selectRules"
               required
             ></v-select>
+            <v-select
+              v-model="animalStateEntered"
+              :items="possibleAnimalStates"
+              label="State Of Animal"
+              required
+              :rules="selectRules"
+            ></v-select>
             <v-text-field
-              v-if="cowStateEntered === 'Just Calved'"
+              v-if="animalStateEntered === 'Just Calved'"
               v-model="dateOfRecentCalving"
               type="date"
+              :rules="dateRules"
               label="Date of recent calving"
             ></v-text-field>
             <v-text-field
               v-if="
-                cowStateEntered === 'Inseminated' || cowStateEntered === 'Dry'
+                animalStateEntered === 'Inseminated' ||
+                animalStateEntered === 'Dry'
               "
               v-model="inseminatedOn"
               type="date"
+              :rules="dateRules"
               label="Date of insemination"
             ></v-text-field>
             <v-text-field
-              v-if="cowStateEntered === 'Inseminated'"
+              v-if="animalStateEntered === 'Inseminated'"
               v-model="semenId"
               type="text"
               label="Semen Id"
             ></v-text-field>
             <v-text-field
-              v-if="cowStateEntered === 'Dry'"
+              v-if="animalStateEntered === 'Dry'"
               v-model="driedOn"
               type="date"
               label="Dried on"
+              :rules="dateRules"
             ></v-text-field>
-            <v-btn outlined large @click="addCow">Add Cow</v-btn>
+            <v-btn outlined large @click="addAnimal">Add Animal</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -51,66 +66,83 @@
 </template>
 <script>
 import { db } from '~/plugins/firebase'
+
 export default {
   layout: 'authenticated',
   data() {
     return {
-      newCow: 'Name',
-      possibleCowStates: ['Just Calved', 'Inseminated', 'Dry'],
-      cowStateEntered: null,
+      newAnimal: 'Name',
+      species: null,
+      possibleAnimalStates: ['Just Calved', 'Inseminated', 'Dry'],
+      animalStateEntered: null,
       dateOfRecentCalving: null,
       inseminatedOn: null,
       semenId: null,
       driedOn: null,
+      nameRules: [
+        (v) =>
+          !this.$store.state.animals.animalsList
+            .map((x) => x.name)
+            .includes(v) ||
+          'Animal with this name already exists please change the name',
+        (v) =>
+          !['Name', 'Cow', 'cow', 'animal'].includes(v) ||
+          'Please give your animal a unique name',
+      ],
+      selectRules: [(v) => v !== null],
+      dateRules: [
+        (v) => new Date() > new Date(v) || "You can't enter future date",
+        (v) => !!v || "Date can't be empty",
+      ],
     }
   },
   methods: {
-    async addCow() {
-      class NewCow {
-        constructor(
-          name,
-          cowStateEntered,
-          dateOfRecentCalving,
-          inseminatedOn,
-          semenId,
-          driedOn,
-        ) {
-          this.name = name
-          this.species = 'cow'
-          if (cowStateEntered === 'Just Calved') {
-            this.state = 'justCalved'
-            this.dateOfRecentCalving = new Date(dateOfRecentCalving)
-          }
-          if (cowStateEntered === 'Inseminated') {
-            this.state = 'inseminated'
-            this.inseminatedOn = new Date(inseminatedOn)
-            this.semenId = semenId
-          }
-          if (cowStateEntered === 'Dry') {
-            this.state = 'dried'
-            this.inseminatedOn = new Date(inseminatedOn)
-            this.driedOn = new Date(driedOn)
+    async addAnimal() {
+      if (this.$refs.form.validate()) {
+        class NewAnimal {
+          constructor(
+            name,
+            species,
+            animalStateEntered,
+            dateOfRecentCalving,
+            inseminatedOn,
+            semenId,
+            driedOn,
+          ) {
+            this.name = name
+            this.species = species
+            if (animalStateEntered === 'Just Calved') {
+              this.state = 'justCalved'
+              this.dateOfRecentCalving = new Date(dateOfRecentCalving)
+            }
+            if (animalStateEntered === 'Inseminated') {
+              this.state = 'inseminated'
+              this.inseminatedOn = new Date(inseminatedOn)
+              this.semenId = semenId
+            }
+            if (animalStateEntered === 'Dry') {
+              this.state = 'dried'
+              this.inseminatedOn = new Date(inseminatedOn)
+              this.driedOn = new Date(driedOn)
+            }
           }
         }
-      }
-      const kow = new NewCow(
-        this.newCow,
-        this.cowStateEntered,
-        this.dateOfRecentCalving,
-        this.inseminatedOn,
-        this.semenId,
-        this.driedOn,
-      )
+        const kow = new NewAnimal(
+          this.newAnimal,
+          this.species,
+          this.animalStateEntered,
+          this.dateOfRecentCalving,
+          this.inseminatedOn,
+          this.semenId,
+          this.driedOn,
+        )
 
-      await db
-        .collection(`users/${this.$store.state.user.uid}/animals/`)
-        .doc(this.newCow)
-        .set(Object.assign({}, kow))
-      db.collection(
-        `users/${this.$store.state.user.uid}/animals/${this.newCow}/heatData`,
-      )
-        .add(Object.assign({}, kow))
-        .then(this.$router.push({ path: 'app' }))
+        await db
+          .collection(`users/${this.$store.state.user.uid}/animals/`)
+          .doc(this.newAnimal)
+          .set(Object.assign({}, kow))
+          .then(this.$router.push({ path: '/app' }))
+      }
     },
   },
 }

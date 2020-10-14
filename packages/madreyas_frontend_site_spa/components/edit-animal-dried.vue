@@ -22,10 +22,12 @@
               max-width="400px"
               class="mx-auto"
             ></v-checkbox>
-            <v-form v-if="sheCalved === true" data-app class="">
+            <v-form v-if="sheCalved === true" ref="form" data-app class="">
               <v-container grid-list-xs>
                 <v-text-field
                   v-model="dateOfRecentCalving"
+                  :ripple="true"
+                  :rules="dateRules"
                   type="date"
                   label="Date of recent calving"
                 ></v-text-field>
@@ -53,22 +55,28 @@ export default {
   data() {
     return {
       sheCalved: false,
-      dateOfRecentCalving: new Date(),
+      dateOfRecentCalving: null,
+      dateRules: [
+        (v) => new Date(v) <= new Date() || "You can't enter future date",
+        (v) => !!v || "Date can't be empty",
+      ],
     }
   },
   methods: {
     updateAnimal() {
-      const uid = this.$store.state.user.uid
-      const name = this.$route.params.animal
-      db.collection(`users/${uid}/animals`)
-        .doc(name)
-        .set({
-          name: this.animal.name,
-          species: this.animal.species,
-          state: 'justCalved',
-          dateOfRecentCalving: new Date(this.dateOfRecentCalving),
-        })
-        .then(this.$router.push({ path: 'app' }))
+      if (this.$refs.form.validate()) {
+        const uid = this.$store.state.user.uid
+        const name = this.$route.params.animal
+        db.collection(`users/${uid}/animals`)
+          .doc(name)
+          .set({
+            name: this.animal.name,
+            species: this.animal.species,
+            state: 'justCalved',
+            dateOfRecentCalving: new Date(this.dateOfRecentCalving),
+          })
+          .then(this.$router.push({ path: 'app' }))
+      }
     },
   },
 }

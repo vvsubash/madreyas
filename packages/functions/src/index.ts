@@ -1,6 +1,6 @@
-import * as functions from 'firebase-functions';
+import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import { addDays } from 'date-fns'
+import { addDays } from "date-fns";
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
@@ -20,44 +20,84 @@ export const addUserOnSignUp = functions
     });
     console.log("completed");
   });
-export const updateCowStateInDoc = functions.region('asia-south1')
-  .firestore
-  .document('users/{userId}/animals/{animal}')
+export const updateCowStateInDoc = functions
+  .region("asia-south1")
+  .firestore.document("users/{userId}/animals/{animal}")
   .onWrite((change, context) => {
-    const docRef = db.collection('users').doc(context.params.userId).collection('animals').doc(context.params.animal)
+    if (change.before.data().state !== change.after.data().state) {
+      const docRef = db
+        .collection("users")
+        .doc(context.params.userId)
+        .collection("animals")
+        .doc(context.params.animal);
 
-    switch (change.after.data().state) {
-      case 'justCalved':
-        docRef.set({
-          whenCanSheBeInseminated: new Date(addDays(change.after.data().dateOfRecentCalving.toDate(), 77))
-        }, { merge: true })
-        break;
-      case 'inseminated':
-        docRef.set({
-          check1: {
-            date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 18)),
-            isCompleted: false,
-            isPassed: false
-          },
-          check2: {
-            date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 90)),
-            isCompleted: false,
-            isPassed: false
-          },
-          check3: {
-            date: new Date(addDays(change.after.data().inseminatedOn.toDate(), 180)),
-            isCompleted: false,
-            isPassed: false
-          }
-        }, { merge: true })
-        break;
-      case 'dried':
-        docRef.set({
-          dateToCheckForEdema: new Date(addDays(change.after.data().inseminatedOn.toDate(), 272)),
-          expectedDateOfCalving: new Date(addDays(change.after.data().inseminatedOn.toDate(), 279)),
-        }, { merge: true })
-        break;
-      default:
-        break;
+      switch (change.after.data().state) {
+        case "justCalved":
+          docRef.set(
+            {
+              whenCanSheBeInseminated: new Date(
+                addDays(change.after.data().dateOfRecentCalving.toDate(), 77)
+              ),
+            },
+            { merge: true }
+          );
+          break;
+        case "inseminated":
+          docRef.set(
+            {
+              check1: {
+                date: new Date(
+                  addDays(change.after.data().inseminatedOn.toDate(), 18)
+                ),
+                isPassed: null,
+              },
+              check2: {
+                date: new Date(
+                  addDays(change.after.data().inseminatedOn.toDate(), 90)
+                ),
+                isPassed: null,
+              },
+              check3: {
+                date: new Date(
+                  addDays(change.after.data().inseminatedOn.toDate(), 180)
+                ),
+                isPassed: null,
+              },
+            },
+            { merge: true }
+          );
+          break;
+        case "dried":
+          docRef.set(
+            {
+              dateToCheckForEdema: new Date(
+                addDays(change.after.data().inseminatedOn.toDate(), 272)
+              ),
+              expectedDateOfCalving: new Date(
+                addDays(change.after.data().inseminatedOn.toDate(), 279)
+              ),
+            },
+            { merge: true }
+          );
+          break;
+        default:
+          break;
+      }
     }
+  });
+
+export const verifyPhoneNumber = functions
+  .region("asia-south1")
+  .https.onCall((data, context) => {
+    const phoneNumber = data.phoneNumber;
+    const accountSid = functions.config().twilio.account_sid;
+    const authToken = functions.config().twilio.auth_token;
+    const client = require("twilio")(accountSid, authToken);
+
+    client.verify
+      .services("VA0292b704fc848266b2e6d808eccded2f")
+      .verifications.create({ to: phoneNumber, channel: "sms" })
+      .then((verification: { status: any }) =>
+        console.log(verification.status)
+      );
   });

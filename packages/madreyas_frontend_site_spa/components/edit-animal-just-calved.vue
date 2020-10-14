@@ -1,10 +1,5 @@
 <template>
   <div>
-    <h4>
-      {{
-        `She calved on ${animal.dateOfRecentCalving} and can be inseminated on need to fix on logic`
-      }}
-    </h4>
     <v-form data-app>
       <v-container>
         <v-row>
@@ -76,12 +71,15 @@ export default {
               },
               { merge: true },
             )
-        : db.collection(`users/${uid}/animals/${name}/heatData`).add({
-            dateOfRecentCalving: this.animal.dateOfRecentCalving,
-            state: 'inseminated',
-            inseminatedOn: new Date(this.dateOfInsemination),
-            semenId: this.semenIdNumber,
-          })
+        : db
+            .collection(`users/${uid}/animals/`)
+            .doc(name)
+            .set({
+              dateOfRecentCalving: this.animal.dateOfRecentCalving,
+              state: 'inseminated',
+              inseminatedOn: new Date(this.dateOfInsemination),
+              semenId: this.semenIdNumber,
+            })
     },
   },
 }

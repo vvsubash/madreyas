@@ -17,7 +17,14 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'Description',
+        content: 'This app is made to manage your small scale dairy',
+      },
       { hid: 'description', name: 'description', content: '' },
+    ],
+    noscript: [
+      { innerHTML: 'This is a webapp and requires javascript to work.' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/icon.png' }],
   },
@@ -29,7 +36,9 @@ export default {
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
-
+  generate: {
+    exclude: [/^\/app/],
+  },
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/eslint
@@ -47,6 +56,7 @@ export default {
     manifest: {
       name: 'Madreyas App',
       short_name: 'Madreyas',
+      theme_color: `#3367D6`,
     },
   },
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

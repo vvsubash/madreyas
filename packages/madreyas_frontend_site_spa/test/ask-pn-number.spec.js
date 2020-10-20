@@ -1,4 +1,3 @@
-
 import { mount } from '@vue/test-utils'
 import AskPnNumber from '@/components/ask-pn-number'
 

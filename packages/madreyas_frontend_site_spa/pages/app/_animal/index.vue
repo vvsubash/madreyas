@@ -5,7 +5,7 @@
     </h1>
     <section>
       <section v-if="animal.state == 'justCalved'">
-        <edit-animal-just-calved :animal="animal" />
+        <view-animal-just-calved :animal="animal" />
       </section>
 
       <section v-else-if="animal.state === 'inseminated'">
@@ -13,7 +13,7 @@
       </section>
 
       <section v-else-if="animal.state == 'dried'">
-        <edit-animal-dried :animal="animal" />
+        <view-animal-dried :animal="animal" />
       </section>
 
       <section v-else>

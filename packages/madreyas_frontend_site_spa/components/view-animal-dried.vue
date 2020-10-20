@@ -2,5 +2,14 @@
   <div><h1>hj</h1></div>
 </template>
 <script>
-export default {}
+export default {
+  props: {
+    animal: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
+  },
+}
 </script>

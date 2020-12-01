@@ -5,11 +5,11 @@
         <v-card outlined max-width="400" class="mx-auto">
           <v-card-title nuxt v-text="animal.name"> </v-card-title>
           <v-list class="transparent">
-            <view-animal-card-list
+            <animal-display-card-details-list
               title="Check For Edema on"
               :sub-title="animal.dateToCheckForEdema.toDate()"
             />
-            <view-animal-card-list
+            <animal-display-card-details-list
               title="Expected Calving on"
               :sub-title="animal.expectedDateOfCalving.toDate()"
             />

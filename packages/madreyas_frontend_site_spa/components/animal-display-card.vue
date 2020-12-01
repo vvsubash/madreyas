@@ -26,7 +26,7 @@
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-        <view-animal-card :animal="animal" />
+        <animal-display-card-details :animal="animal" />
         <v-divider></v-divider>
 
         <v-card-actions>

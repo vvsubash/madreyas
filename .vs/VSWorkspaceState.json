@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\packages",
+    "\\packages\\madreyas_frontend_site_spa",
+    "\\packages\\madreyas_frontend_site_spa\\layouts",
+    "\\packages\\madreyas_frontend_site_spa\\pages",
+    "\\packages\\madreyas_frontend_site_spa\\pages\\app"
+  ],
+  "SelectedNode": "\\packages\\madreyas_frontend_site_spa\\layouts\\authenticated.vue",
+  "PreviewInSolutionExplorer": false
+}

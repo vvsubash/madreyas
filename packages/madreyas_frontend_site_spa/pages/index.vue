@@ -12,9 +12,9 @@
         </ul>
       </nav>
       <h1>
-        Simple web app to mange your <b><u>Dairy Farm</u>.</b>
+        Simple web app to mange your <b><mark>Dairy Farm.</mark></b>
       </h1>
-      <h2>We just want to make your dairy profitable.</h2>
+      <h2>We just want to make your dairy <mark>more profitable.</mark></h2>
       <br />
       <a @click="logIn">
         <b>Login Now</b>
@@ -57,7 +57,8 @@
           <p>
             We are creating a database for all the semen available for
             artificial insemination which helps you to know the productivity &
-            lineage of the<a
+            lineage of the
+            <a
               href="https://www.nddb.coop/services/animalbreeding/geneticimprovement/sireproofs"
             >
               donor bull</a
@@ -66,7 +67,7 @@
           </p>
         </aside>
         <aside>
-          <h2>Centralised Resource Planning.</h2>
+          <h2>Centralised Resource Planning<sup>WIP</sup>.</h2>
           <p>
             Comprehensive and pluggable resource planning systems to manage
             <a

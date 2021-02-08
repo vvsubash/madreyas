@@ -36,6 +36,6 @@ const db = firebaseApp.firestore()
 const auth = firebase.auth()
 const authProvider = new firebase.auth.GoogleAuthProvider()
 
-export const perf = firebaseApp.performance()
+const perf = firebaseApp.performance()
 
-export { db, auth, authProvider }
+export { db, auth, authProvider, perf }

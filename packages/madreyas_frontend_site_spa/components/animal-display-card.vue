@@ -12,7 +12,7 @@
     </v-card-title>
     <v-card-subtitle>State: {{ animal.state }} </v-card-subtitle>
     <v-card-actions>
-      <v-btn color="orange lighten-2" text @click="show = !show">
+      <v-btn color="orange lighten-2" outlined text @click="show = !show">
         More Details
       </v-btn>
 

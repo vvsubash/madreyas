@@ -56,7 +56,7 @@ export default {
     manifest: {
       name: 'Madreyas App',
       short_name: 'Madreyas',
-      theme_color: `#3367D6`,
+      theme_color: `#FFB74D`,
     },
   },
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

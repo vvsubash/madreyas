@@ -9,13 +9,13 @@ Vue.use(firestorePlugin)
 
 export const firebaseApp = firebase.initializeApp({
   apiKey: process.env.NUXT_ENV_APIKEY,
+  appId: process.env.NUXT_ENV_APPID,
   authDomain: process.env.NUXT_ENV_AUTHDOMAIN,
   databaseURL: process.env.NUXT_ENV_DATABASEURL,
+  measurementId: process.env.NUXT_ENV_MEASUREMENTID,
+  messagingSenderId: process.env.NUXT_ENV_MESSAGINGSENDERID,
   projectId: process.env.NUXT_ENV_PROJECTID,
   storageBucket: process.env.NUXT_ENV_STORAGEBUCKET,
-  messagingSenderId: process.env.NUXT_ENV_MESSAGINGSENDERID,
-  appId: process.env.NUXT_ENV_APPID,
-  measurementId: process.env.NUXT_ENV_MEASUREMENTID,
 })
 
 firebase
@@ -36,6 +36,6 @@ const db = firebaseApp.firestore()
 const auth = firebase.auth()
 const authProvider = new firebase.auth.GoogleAuthProvider()
 
-// export const perf = firebaseApp.performance()
+const perf = firebaseApp.performance()
 
-export { db, auth, authProvider }
+export { db, auth, authProvider, perf }

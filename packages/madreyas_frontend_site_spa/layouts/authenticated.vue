@@ -56,6 +56,20 @@
               <v-btn block elevation="2" @click="logOut">logOut</v-btn>
             </v-list-item-title>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <nuxt-link :to="`/app/addPhoneNumber`" block elevation="2">
+                <v-btn block elevation="2">add Pn Number</v-btn>
+              </nuxt-link>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <nuxt-link :to="`/featureRequest`" block elevation="2">
+                <v-btn block elevation="2">Feature Request</v-btn>
+              </nuxt-link>
+            </v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -79,15 +93,18 @@ export default {
       this.drawer = false
     },
   },
-  beforeMount() {
-    if (this.$store.state.user == null) {
-      this.$store.dispatch('signIn')
-    }
-  },
+  // beforeMount() {
+  //   if (this.$store.state.user == null) {
+  //     this.$store.dispatch('signIn')
+  //   }
+  // },
 
   methods: {
     logOut() {
       this.$store.dispatch('signOut')
+    },
+    logIn() {
+      this.$store.dispatch('signIn')
     },
   },
 }

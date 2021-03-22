@@ -7,12 +7,12 @@
       height="200px"
     >
     </v-img>
-    <v-card-title @click="$router.push({ path: `/app/${animal.name}` })">
+    <v-card-title @click="$router.push({ path: `/app/${animal.name}/edit` })">
       {{ `${animal.species === 'Cow' ? '🐄 ' : '🐃 '} ${animal.name}` }}
     </v-card-title>
     <v-card-subtitle>State: {{ animal.state }} </v-card-subtitle>
     <v-card-actions>
-      <v-btn color="orange lighten-2" text @click="show = !show">
+      <v-btn color="orange lighten-2" outlined text @click="show = !show">
         More Details
       </v-btn>
 
@@ -26,7 +26,7 @@
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-        <view-animal-card :animal="animal" />
+        <animal-display-card-details :animal="animal" />
         <v-divider></v-divider>
 
         <v-card-actions>

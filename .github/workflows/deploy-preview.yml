@@ -1,0 +1,6 @@
+name: deploy-preview
+on: push
+jobs:
+  steps:
+    - name: Deploy to Firebase Hosting
+      uses: FirebaseExtended/action-hosting-deploy@v0.3-alpha

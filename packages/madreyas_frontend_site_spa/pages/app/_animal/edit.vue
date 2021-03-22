@@ -6,6 +6,7 @@
     </section>
 
     <section v-else-if="animal.state === 'inseminated'">
+      <view-animal-inseminated :animal="animal" />
       <edit-animal-inseminated :animal="animal" />
     </section>
 

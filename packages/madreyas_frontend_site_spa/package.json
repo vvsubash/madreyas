@@ -14,6 +14,7 @@
     "test": "jest",
     "commit": "npx git-cz"
   },
+
   "dependencies": {
     "@nuxtjs/pwa": "^3.0.2",
     "core-js": "^3.6.5",

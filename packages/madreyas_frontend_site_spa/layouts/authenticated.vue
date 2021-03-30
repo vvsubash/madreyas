@@ -23,7 +23,7 @@
 
               <v-card-actions>
                 <v-btn color="deep-orange" text @click="logIn">
-                  Please wait while we log you in
+                  Please click here to log you in
                 </v-btn>
               </v-card-actions>
             </v-card>

@@ -91,3 +91,6 @@ sw.*
 # storybook
 .nuxt-storybook
 storybook-static
+
+# Local Netlify folder
+.netlify

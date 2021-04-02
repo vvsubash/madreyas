@@ -93,15 +93,18 @@ export default {
       this.drawer = false
     },
   },
-  beforeMount() {
-    if (this.$store.state.user == null) {
-      this.$store.dispatch('signIn')
-    }
-  },
+  // beforeMount() {
+  //   if (this.$store.state.user == null) {
+  //     this.$store.dispatch('signIn')
+  //   }
+  // },
 
   methods: {
     logOut() {
       this.$store.dispatch('signOut')
+    },
+    logIn() {
+      this.$store.dispatch('signIn')
     },
   },
 }
